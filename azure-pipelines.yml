@@ -18,6 +18,7 @@ steps:
 - script: |
     npm install -g @angular/cli
     npm install
+    ng test --code-coverage
     ng build --prod
   displayName: 'npm install and build'
 
@@ -25,4 +26,10 @@ steps:
   inputs:
     PathtoPublish: 'dist'
     ArtifactName: 'drop'
+    publishLocation: Container
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'coverage'
+    ArtifactName: 'test'
     publishLocation: Container
